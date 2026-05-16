@@ -161,21 +161,4 @@ end
 
 -- 4. Monitoramento Contínuo com proteção anti-bug para o comando :pb
 game:GetService("RunService").Heartbeat:Connect(function()
-	if not savedTargetPosition or isTransporting then return end
-	
-	local ball = encontrarBolaReal()
-	if ball then
-		local currentPos = ball.Position
-		local movementDelta = (currentPos - lastKnownBallPosition).Magnitude
-		
-		-- Verifica se o movimento condiz com um chute válido (ignora o spawn do :pb)
-		if movementDelta > 0.4 and movementDelta < 10 and lastKnownBallPosition ~= Vector3.new(0,0,0) then
-			if verificarContextoDeChute() then
-				guiarBola(ball)
-			end
-		end
-		lastKnownBallPosition = currentPos
-	else
-		lastKnownBallPosition = Vector3.new(0,0,0)
-	end
-end)
+	if not savedTargetPosition or isTransporting then return 
